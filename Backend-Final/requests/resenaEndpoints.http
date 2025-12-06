@@ -1,0 +1,219 @@
+# Peticiones HTTP para el CRUD de Reseñas
+# Base URL: http://localhost:3000/api/resenas
+
+POST http://localhost:3000/api/resenas
+Content-Type: application/json
+
+{
+  "juego": "ID_QUE_OBTUVISTE_DE_LOS_JUEGOS",
+  "puntuacion": 4,
+  "texto": "Excelente juego, muy recomendable"
+}
+
+###
+# GET: Obtener todas las reseñas
+GET http://localhost:3000/api/resenas
+Content-Type: application/json
+
+###
+# GET: Obtener todas las reseñas de un juego específico (reemplaza :juegoId con ID real)
+GET http://localhost:3000/api/resenas?juegoId=673a1b2c3d4e5f6g7h8i9j0k
+Content-Type: application/json
+
+###
+# GET: Obtener reseña por ID (reemplaza :id con un ID real)
+GET http://localhost:3000/api/resenas/673a1b2c3d4e5f6g7h8i9j0k
+Content-Type: application/json
+
+###
+# POST: Crear nueva reseña
+POST http://localhost:3000/api/resenas
+Content-Type: application/json
+
+{
+  "juego": "673a1b2c3d4e5f6g7h8i9j0k",
+  "puntuacion": 5,
+  "texto": "Un juego absolutamente increíble. La historia es épica y la jugabilidad es adictiva.",
+  "autor": "Juan Pérez"
+}
+
+###
+# POST: Crear reseña con autor por defecto
+POST http://localhost:3000/api/resenas
+Content-Type: application/json
+
+{
+  "juego": "673a1b2c3d4e5f6g7h8i9j0k",
+  "puntuacion": 4,
+  "texto": "Muy buen juego, aunque tiene algunos bugs menores. Recomendable."
+}
+
+###
+# POST: Crear reseña negativa
+POST http://localhost:3000/api/resenas
+Content-Type: application/json
+
+{
+  "juego": "673a1b2c3d4e5f6g7h8i9j0k",
+  "puntuacion": 2,
+  "texto": "Decepcionante. Las expectativas no se cumplieron. Gráficos mediocres y jugabilidad repetitiva.",
+  "autor": "GamerCrítico"
+}
+
+###
+# POST: Crear reseña media
+POST http://localhost:3000/api/resenas
+Content-Type: application/json
+
+{
+  "juego": "673a1b2c3d4e5f6g7h8i9j0k",
+  "puntuacion": 3,
+  "texto": "Juego promedio. No es malo pero tampoco destaca. Adecuado para pasar el tiempo.",
+  "autor": "PlayerNeutral"
+}
+
+###
+# POST: Crear reseña excelente (5 estrellas)
+POST http://localhost:3000/api/resenas
+Content-Type: application/json
+
+{
+  "juego": "673a1b2c3d4e5f6g7h8i9j0k",
+  "puntuacion": 5,
+  "texto": "Obra maestra. De obligatoria jugabilidad. Arte en su máxima expresión.",
+  "autor": "MasterGamer"
+}
+
+###
+# PUT: Actualizar reseña completa (reemplaza :id con un ID real)
+PUT http://localhost:3000/api/resenas/673a1b2c3d4e5f6g7h8i9j0k
+Content-Type: application/json
+
+{
+  "juego": "673a1b2c3d4e5f6g7h8i9j0k",
+  "puntuacion": 4,
+  "texto": "Después de jugar más tiempo, cambié mi opinión. Es mejor de lo que pensé inicialmente.",
+  "autor": "Juan Pérez Actualizado"
+}
+
+###
+# PUT: Actualizar solo la puntuación
+PUT http://localhost:3000/api/resenas/673a1b2c3d4e5f6g7h8i9j0k
+Content-Type: application/json
+
+{
+  "puntuacion": 3
+}
+
+###
+# PUT: Actualizar solo el texto de la reseña
+PUT http://localhost:3000/api/resenas/673a1b2c3d4e5f6g7h8i9j0k
+Content-Type: application/json
+
+{
+  "texto": "Actualización: después de terminar el juego completamente, mi opinión ha cambiado."
+}
+
+###
+# PUT: Actualizar autor
+PUT http://localhost:3000/api/resenas/673a1b2c3d4e5f6g7h8i9j0k
+Content-Type: application/json
+
+{
+  "autor": "Nuevo Autor"
+}
+
+###
+# DELETE: Eliminar reseña (reemplaza :id con un ID real)
+DELETE http://localhost:3000/api/resenas/673a1b2c3d4e5f6g7h8i9j0k
+Content-Type: application/json
+
+###
+# Casos de error comunes
+
+# POST: Intento crear reseña sin juego (debe fallar)
+POST http://localhost:3000/api/resenas
+Content-Type: application/json
+
+{
+  "puntuacion": 4,
+  "texto": "Buen juego"
+}
+
+###
+# POST: Intento crear reseña sin puntuación (debe fallar)
+POST http://localhost:3000/api/resenas
+Content-Type: application/json
+
+{
+  "juego": "673a1b2c3d4e5f6g7h8i9j0k",
+  "texto": "Buen juego"
+}
+
+###
+# POST: Intento crear reseña sin texto (debe fallar)
+POST http://localhost:3000/api/resenas
+Content-Type: application/json
+
+{
+  "juego": "673a1b2c3d4e5f6g7h8i9j0k",
+  "puntuacion": 4
+}
+
+###
+# POST: Intento crear reseña con puntuación menor a 1 (debe fallar)
+POST http://localhost:3000/api/resenas
+Content-Type: application/json
+
+{
+  "juego": "673a1b2c3d4e5f6g7h8i9j0k",
+  "puntuacion": 0,
+  "texto": "Puntuación inválida"
+}
+
+###
+# POST: Intento crear reseña con puntuación mayor a 5 (debe fallar)
+POST http://localhost:3000/api/resenas
+Content-Type: application/json
+
+{
+  "juego": "673a1b2c3d4e5f6g7h8i9j0k",
+  "puntuacion": 6,
+  "texto": "Puntuación inválida"
+}
+
+###
+# POST: Intento crear reseña con ID de juego inválido (debe fallar)
+POST http://localhost:3000/api/resenas
+Content-Type: application/json
+
+{
+  "juego": "idInvalido123",
+  "puntuacion": 4,
+  "texto": "Juego inexistente"
+}
+
+###
+# PUT: Intento actualizar reseña inexistente (debe fallar)
+PUT http://localhost:3000/api/resenas/idInexistente123456789012
+Content-Type: application/json
+
+{
+  "puntuacion": 5,
+  "texto": "Reseña actualizada"
+}
+
+###
+# GET: Intento obtener reseña inexistente (debe fallar)
+GET http://localhost:3000/api/resenas/idInexistente123456789012
+Content-Type: application/json
+
+###
+# DELETE: Intento eliminar reseña inexistente (debe fallar)
+DELETE http://localhost:3000/api/resenas/idInexistente123456789012
+Content-Type: application/json
+
+###
+# GET: Filtrar reseñas por juego inexistente (resultado vacío)
+GET http://localhost:3000/api/resenas?juegoId=idInexistente123
+Content-Type: application/json

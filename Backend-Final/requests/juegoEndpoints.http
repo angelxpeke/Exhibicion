@@ -1,0 +1,172 @@
+// Casos de éxito:
+// 201 = Se creó correctamente (POST - Crear)
+// 200 = Operación exitosa (GET / PUT / DELETE)
+
+// Casos de error:
+// 400 = Datos inválidos enviados por el cliente
+// 404 = Recurso no encontrado
+// 500 = Error interno del servidor
+
+# Peticiones HTTP para el CRUD de Juegos
+# Base URL: http://localhost:3000/api/juegos
+
+###
+# GET: Obtener todos los juegos
+GET http://localhost:3000/api/juegos
+Content-Type: application/json
+
+###
+# GET: Obtener juego por ID (reemplaza :id con un ID real)
+GET http://localhost:3000/api/juegos/673a1b2c3d4e5f6g7h8i9j0k
+Content-Type: application/json
+
+###
+# POST: Crear nuevo juego
+POST http://localhost:3000/api/juegos
+Content-Type: application/json
+
+{
+  "nombre": "The Legend of Zelda: Breath of the Wild",
+  "plataforma": "Nintendo Switch",
+  "portadaURL": "https://example.com/zelda-botw.jpg",
+  "estado": "Pendiente",
+  "horasJugadas": 0
+}
+
+###
+# POST: Crear juego mínimo (solo campos obligatorios)
+POST http://localhost:3000/api/juegos
+Content-Type: application/json
+
+{
+  "nombre": "Minecraft",
+  "plataforma": "PC"
+}
+
+###
+# POST: Crear juego con estado "Jugando"
+POST http://localhost:3000/api/juegos
+Content-Type: application/json
+
+{
+  "nombre": "Elden Ring",
+  "plataforma": "PlayStation 5",
+  "portadaURL": "https://example.com/elden-ring.jpg",
+  "estado": "Jugando",
+  "horasJugadas": 45
+}
+
+###
+# POST: Crear juego completado
+POST http://localhost:3000/api/juegos
+Content-Type: application/json
+
+{
+  "nombre": "God of War",
+  "plataforma": "PlayStation 4",
+  "portadaURL": "https://example.com/god-of-war.jpg",
+  "estado": "Completado",
+  "horasJugadas": 25
+}
+
+###
+# PUT: Actualizar juego completo (reemplaza :id con un ID real)
+PUT http://localhost:3000/api/juegos/673a1b2c3d4e5f6g7h8i9j0k
+Content-Type: application/json
+
+{
+  "nombre": "The Legend of Zelda: Breath of the Wild",
+  "plataforma": "Nintendo Switch",
+  "portadaURL": "https://example.com/zelda-botw-updated.jpg",
+  "estado": "Completado",
+  "horasJugadas": 120
+}
+
+###
+# PUT: Actualizar solo el estado del juego
+PUT http://localhost:3000/api/juegos/673a1b2c3d4e5f6g7h8i9j0k
+Content-Type: application/json
+
+{
+  "estado": "Jugando"
+}
+
+###
+# PUT: Actualizar horas jugadas
+PUT http://localhost:3000/api/juegos/673a1b2c3d4e5f6g7h8i9j0k
+Content-Type: application/json
+
+{
+  "horasJugadas": 35
+}
+
+###
+# PUT: Actualizar URL de portada
+PUT http://localhost:3000/api/juegos/673a1b2c3d4e5f6g7h8i9j0k
+Content-Type: application/json
+
+{
+  "portadaURL": "https://new-domain.com/new-image.jpg"
+}
+
+###
+# DELETE: Eliminar juego (reemplaza :id con un ID real)
+DELETE http://localhost:3000/api/juegos/673a1b2c3d4e5f6g7h8i9j0k
+Content-Type: application/json
+
+###
+# Casos de error comunes
+
+# POST: Intento crear juego sin nombre (debe fallar)
+POST http://localhost:3000/api/juegos
+Content-Type: application/json
+
+{
+  "plataforma": "PC"
+}
+
+###
+# POST: Intento crear juego sin plataforma (debe fallar)
+POST http://localhost:3000/api/juegos
+Content-Type: application/json
+
+{
+  "nombre": "Cyberpunk 2077"
+}
+
+###
+# POST: Intento crear juego con estado inválido (debe fallar)
+POST http://localhost:3000/api/juegos
+Content-Type: application/json
+
+{
+  "nombre": "Cyberpunk 2077",
+  "plataforma": "PC",
+  "estado": "EstadoInvalido"
+}
+
+###
+# POST: Intento crear juego con horas negativas (debe fallar)
+POST http://localhost:3000/api/juegos
+Content-Type: application/json
+
+{
+  "nombre": "Cyberpunk 2077",
+  "plataforma": "PC",
+  "horasJugadas": -5
+}
+
+###
+# PUT: Intento actualizar juego inexistente (debe fallar)
+PUT http://localhost:3000/api/juegos/idInexistente123456789012
+Content-Type: application/json
+
+{
+  "nombre": "Juego Actualizado",
+  "plataforma": "PC"
+}
+
+###
+# GET: Intento obtener juego inexistente (debe fallar)
+GET http://localhost:3000/api/juegos/idInexistente123456789012
+Content-Type: application/json
