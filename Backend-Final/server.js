@@ -18,7 +18,6 @@ app.use(cors({
 })); 
 
 
-// CONEXIÓN CON LA BD
 mongoose.connect(MONGODB_URL) 
     .then(() => {
         console.log('Conexión exitosa a MongoDB Atlas'); 
@@ -28,7 +27,7 @@ mongoose.connect(MONGODB_URL)
         process.exit(1); 
     })
 
-// RUTAS
+
 const authRoutes = require('./routes/authRoutes');
 const authMiddleware = require('./middleware/auth');
 const juegoRoutes = require('./routes/juegoRoutes');
@@ -36,10 +35,8 @@ const resenasRoutes = require('./routes/resenaRoutes');
 
 app.use('/api/auth', authRoutes);
 
-// simple healthcheck
 app.get('/health', (req, res) => res.json({ ok: true, env: process.env.NODE_ENV || 'development' }));
 
-// Protect API routes so each request uses the user's DB
 app.use('/api/juegos', authMiddleware, juegoRoutes);
 app.use('/api/resenas', authMiddleware, resenasRoutes);
 
